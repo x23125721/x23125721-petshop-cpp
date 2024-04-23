@@ -2,15 +2,37 @@
 {% load static %}
 {% block content %}
 
-
 <head>
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
   <style media="screen">
-    a:link {
+    body {
+      background-color: #fff; /* Light beige background */
+    }
+
+    .panel-danger > .panel-heading {
+      background-color: #153448; /* Dark blue background */
+      color: #DFD0B8; /* Light beige text */
+    }
+
+    .table {
+      background-color: #fff; /* Grey background for table */
+      color: #000; /* Light beige text for table content */
+    }
+
+    .btn-primary {
+      background-color: #3C5B6F; /* Dark grayish-blue for primary buttons */
+    }
+
+    .btn-danger {
+      background-color: #d9534f; /* Dark blue for danger buttons */
+    }
+
+    a:link, a:visited {
       text-decoration: none;
+      color: #DFD0B8; /* Light beige links */
     }
 
     h6 {
@@ -20,13 +42,17 @@
     .row {
       margin: 100px;
     }
+
+    .btn-xs {
+      padding: 5px 10px; /* Adjust button padding */
+    }
   </style>
 </head>
 
 <div class="container">
   <div class="panel panel-danger">
     <div class="panel-heading">
-      <h6 class="panel-title">Total Orders</h6>
+      <h6 class="panel-title">Total Pets Adopted</h6>
     </div>
     <table class="table table-hover table-bordered" id="dev-table">
       <thead>
@@ -40,26 +66,26 @@
           <th>Actions</th>
         </tr>
       </thead>
-      <!-- p for product, c for customer-->
-      {% for product,customer,order in data %}
+      {% for product, customer, order in data %}
       <tr>
         {% for c in customer %}
-        <td> {{c.get_name}}</td>
-        <td>{{c.mobile}}</td>
-        <td>{{order.address}}</td>
-
+        <td>{{ c.get_name }}</td>
+        <td>{{ c.mobile }}</td>
+        <td>{{ order.address }}</td>
         {% endfor %}
         {% for p in product %}
-        <td> {{p.name}}</td>
-        <td> <img src="{% static p.product_image.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
-        <td>{{order.status}}</td>
-        <td><a class="btn btn-primary btn-xs" href="{% url 'update-order' order.id  %}"><span class="glyphicon glyphicon-edit"></span></a>
-        <a class="btn btn-danger btn-xs" href="{% url 'delete-order' order.id  %}"><span class="glyphicon glyphicon-trash"></span></a></td>
-
+        <td>{{ p.name }}</td>
+        <td><img src="{% static p.product_image.url %}" alt="Product Image" height="40px" width="40px"></td>
+        <td>{{ order.status }}</td>
+        <td>
+          <a class="btn btn-primary btn-xs" href="{% url 'update-order' order.id %}">
+            <span class="glyphicon glyphicon-edit"></span>
+          </a>
+          <a class="btn btn-danger btn-xs" href="{% url 'delete-order' order.id %}">
+            <span class="glyphicon glyphicon-trash"></span>
+          </a>
+        </td>
         {% endfor %}
-
-
-
       </tr>
       {% endfor %}
     </table>

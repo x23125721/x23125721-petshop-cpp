@@ -2,7 +2,6 @@
 {% load static %}
 {% block content %}
 
-
 <head>
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
@@ -41,7 +40,13 @@
       {% for c in customers %}
       <tr>
         <td> {{c.get_name}}</td>
-        <td> <img src="{% static c.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td> 
+            {% if c.profile_pic %}
+                <img src="{{ c.profile_pic.url }}" alt="Profile Pic" height="40px" width="40px" />
+            {% else %}
+                <img src="{% static 'default-profile-pic.jpg' %}" alt="Default Profile Picture" height="40px" width="40px" />
+            {% endif %}
+        </td>
         <td>{{c.mobile}}</td>
         <td>{{c.address}}</td>
         <td><a class="btn btn-primary btn-xs" href="{% url 'update-customer' c.id  %}"><span class="glyphicon glyphicon-edit"></span></a>

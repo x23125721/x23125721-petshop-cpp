@@ -2,50 +2,79 @@
 {% load static %}
 {% block content %}
 
-
 <head>
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
   <style media="screen">
-    a:link {
+    body {
+      background-color: #f4f4f4; /* Light gray background for a clean look */
+    }
+
+    .panel {
+      border: none; /* Remove panel borders for a cleaner design */
+    }
+
+    .panel-heading {
+      background-color: #4E5D6C; /* Dark slate for headings */
+      color: #FFFFFF; /* White text for contrast */
+    }
+
+    .panel-title {
+      font-weight: bold; /* Make panel titles bold */
+    }
+
+    .table {
+      background-color: #FFFFFF; /* White background for table */
+      color: #333; /* Darker text for readability */
+    }
+
+    .table th {
+      background-color: #6C7B8A; /* A lighter slate for header row */
+      color: #FFFFFF; /* White text for header */
+    }
+
+    .btn-primary {
+      background-color: #4CAF50; /* Vibrant green for primary buttons */
+      border-color: #4CAF50; /* Same color border for button */
+    }
+
+    .btn-danger {
+      background-color: #F44336; /* Bright red for danger buttons */
+      border-color: #F44336; /* Same color border for button */
+    }
+
+    a:link, a:visited {
       text-decoration: none;
+      color: #555555; /* Dark gray for links */
     }
 
-    h6 {
+    .float {
+      position: fixed;
+      width: 70px;
+      height: 70px;
+      bottom: 40px;
+      right: 40px;
+      background-color: #008CBA; /* Blue for floating action button */
+      color: #FFF;
+      border-radius: 50px;
       text-align: center;
+      box-shadow: 2px 2px 10px #999;
+      font-size: 24px; /* Larger icon font size */
+      line-height: 70px; /* Center plus icon vertically */
     }
 
-    .row {
-      margin: 100px;
+    .my-float {
+      margin-top: 0;
     }
-
-    .float{
-	position:fixed;
-	width:70px;
-	height:70px;
-	bottom:60px;
-	right:60px;
-	background-color:#3eb54d;
-	color:#FFF;
-	border-radius:50px;
-	text-align:center;
-	box-shadow: 5px 5px 5px #505050;
-}
-
-.my-float{
-	margin-top:22px;
-}
   </style>
 </head>
-
-
 
 <div class="container">
   <div class="panel panel-danger">
     <div class="panel-heading">
-      <h6 class="panel-title">Total Products</h6>
+      <h6 class="panel-title">Total Pets</h6>
     </div>
     <table class="table table-hover table-bordered" id="dev-table">
       <thead>
@@ -58,20 +87,22 @@
         </tr>
       </thead>
       {% for p in products %}
-  {% if p %}
+      {% if p %}
 
       <tr>
-        <td> {{p.name}}</td>
-        <td> <img src="{% static p.product_image.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
-        <td>{{p.price}}</td>
-        <td>{{p.description}}</td>
-        <td><a class="btn btn-primary btn-xs" href="{% url 'update-product' p.id  %}"><span class="glyphicon glyphicon-edit"></span></a>
-          <a class="btn btn-danger btn-xs" href="{% url 'delete-product' p.id  %}"><span class="glyphicon glyphicon-trash"></span></a></td>
-
+        <td>{{ p.name }}</td>
+        <td><img src="{% static p.product_image.url %}" alt="Product Image" height="40px" width="40px" /></td>
+        <td>{{ p.price }}</td>
+        <td>{{ p.description }}</td>
+        <td>
+          <a class="btn btn-primary btn-xs" href="{% url 'update-product' p.id  %}"><span class="glyphicon glyphicon-edit"></span></a>
+          <a class="btn btn-danger btn-xs" href="{% url 'delete-product' p.id  %}"><span class="glyphicon glyphicon-trash"></span></a>
+        </td>
       </tr>
-      {%else%}
-      <br><br><br>
-      <h1>No Products!!</h1>
+      {% else %}
+      <tr>
+        <td colspan="5"><h1 class="text-center">No Products Available!</h1></td>
+      </tr>
       {% endif %}
       {% endfor %}
     </table>
