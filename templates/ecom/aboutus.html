@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>PetStore</title>
+  <style media="screen">
+    .footer{
+      position: fixed;
+    }
+  </style>
+</head>
+
+<body style="background-color:#f7f7f7;">
+  {%if request.user.is_authenticated%}
+    {% include "ecom/customer_navbar.html" %}
+  {%else%}
+    {% include "ecom/navbar.html" %}
+  {%endif%}
+  <br><br><br>
+  <div style="max-width: 800px; margin: 0 auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+    <h2 style="text-align: center;">About Us</h2>
+    <p style="text-align: justify;">Welcome to PetStore, your ultimate destination for all things pet-related! We understand the special bond between pets and their owners, and our mission is to enhance the lives of pets and pet parents alike.</p>
+    <p style="text-align: justify;">At PetStore, we offer a wide range of premium pet products, from nutritious food and tasty treats to stylish accessories and comfortable bedding. Our team consists of passionate pet lovers who are dedicated to providing the best products and services for your furry friends.</p>
+    <p style="text-align: justify;">Whether you're a proud pet parent or simply love animals, PetStore is your go-to source for all your pet care needs. Join our community today and experience the joy of shopping for your pets with confidence and convenience!</p>
+  </div> </div><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  {% include "ecom/footer.html" %}
+</body>
+
+
+</html>
